@@ -1,6 +1,8 @@
 package com.example.ladm_u3_p1
 
 import android.content.ContentValues
+import android.content.Context
+import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
@@ -11,9 +13,50 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
     var bd=BaseDatos(this,"PRACTICA1",null,1)
     var IDs=ArrayList<Int>()
+    var migracion=true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        mostrarTodos()
+
+        //detectar conexion internet
+        Thread(Runnable {
+            while (true){
+
+                var textInicial="no tiene conexion"
+                var internet=false
+                val sc=getSystemService(Context.CONNECTIVITY_SERVICE)as ConnectivityManager
+                var redInfo=sc.allNetworkInfo
+                for(ir in redInfo){
+                    if (ir.typeName.equals("WIFI",ignoreCase = true))
+                        if(ir.isConnected) {
+                            textInicial="CONECTADO WIFI"
+                            internet=true
+                        }
+
+                }
+                runOnUiThread {
+                    textoConexion.setText(textInicial)
+                    if (internet == true && migracion==true) {
+                        migracion =false
+                        AlertDialog.Builder(this)
+                            .setTitle("ATENCION")
+                            .setMessage("QUE DESEAS HACER CON: ?")
+                            .setPositiveButton("NADA") { d, i -> }
+                            .setNegativeButton("ELIMINAR") { d, i ->
+
+                            }
+                            .setNeutralButton("ACTUALIZAR") { d, i ->
+                                migracion=false
+                            }
+                            .show()
+
+                    }
+                }
+
+            }
+        }).start()
+
 
         insertar.setOnClickListener{
             var alumnos=bd.writableDatabase
@@ -80,5 +123,14 @@ class MainActivity : AppCompatActivity() {
         carrera1.setText("")
         carrera2.setText("")
         correo.setText("")
+    }
+    fun eliminarDatosTabla(){
+        val resultado= bd.writableDatabase.delete("PERSONA",null,null)
+        if(resultado==0){
+            AlertDialog.Builder(this).setMessage("ERROR NO SE BORRO").show()
+        }else{
+            Toast.makeText(this,"SE BORRO CON EXITO!",Toast.LENGTH_LONG).show()
+            mostrarTodos()
+        }
     }
 }

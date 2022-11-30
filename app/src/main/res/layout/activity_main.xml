@@ -56,6 +56,11 @@
         android:hint="CORREO ELECTRONICO"
         android:id="@+id/correo"
         />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textoConexion"
+        />
     <Button
         android:id="@+id/insertar"
         android:layout_width="match_parent"
