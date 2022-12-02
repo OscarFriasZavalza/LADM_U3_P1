@@ -13,8 +13,6 @@ class BaseDatos(
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL("create table ESTUDIANTES(ID INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "NOMBRE VARCHAR(400)," +
-                "APELLIDOP VARCHAR(400)," +
-                "APELLIDOM VARCHAR(400)," +
                 "ESCUELA VARCHAR(400)," +
                 "TELEFONO INT," +
                 "CARRERA1 VARCHAR(400)," +

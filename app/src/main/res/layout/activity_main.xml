@@ -14,18 +14,7 @@
         android:hint="NOMBRE"
         android:id="@+id/nombre"
         />
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="APELLIDO PATERNO"
-        android:id="@+id/apellidoP"
-        />
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="APELLIDO MATERNO"
-        android:id="@+id/apellidoM"
-        />
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -56,16 +45,33 @@
         android:hint="CORREO ELECTRONICO"
         android:id="@+id/correo"
         />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textoConexion"
+        android:textSize="20dp"
         />
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:id="@+id/sincronizar"
+        android:src="@drawable/sincronizar"
+        android:layout_marginLeft="300dp"
+        android:layout_marginBottom="10dp"
+        />
+
     <Button
         android:id="@+id/insertar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="insertar"
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/consultarFirebase"
+        android:text="Consultar Firebase"
         />
     <ListView
         android:id="@+id/listaAlumnos"
